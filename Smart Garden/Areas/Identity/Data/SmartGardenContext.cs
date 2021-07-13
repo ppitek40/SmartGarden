@@ -15,7 +15,7 @@ namespace SmartGarden.Data
             : base(options)
         {
         }
-        public DbSet<Device> Devices { get; set; }
+        public DbSet<Models.Device> Devices { get; set; }
         public DbSet<CultivationPlan> CultivationPlans { get; set; }
         public DbSet<MeasurementHistory> MeasurementHistories { get; set; }
 

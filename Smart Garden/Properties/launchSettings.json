@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Smart_Garden": {
+    "SmartGarden": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

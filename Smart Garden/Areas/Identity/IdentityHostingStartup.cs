@@ -17,7 +17,7 @@ namespace SmartGarden.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<SmartGardenContext>(options =>
                     options.UseSqlite(
-                        context.Configuration.GetConnectionString("Smart_GardenContextConnection")));
+                        context.Configuration.GetConnectionString("SmartGardenContextConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<SmartGardenContext>();

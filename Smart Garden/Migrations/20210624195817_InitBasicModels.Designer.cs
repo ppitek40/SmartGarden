@@ -214,7 +214,7 @@ namespace SmartGarden.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Smart_Garden.Models.CultivationPlan", b =>
+            modelBuilder.Entity("SmartGarden.Models.CultivationPlan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +228,7 @@ namespace SmartGarden.Migrations
                     b.ToTable("CultivationPlans");
                 });
 
-            modelBuilder.Entity("Smart_Garden.Models.Device", b =>
+            modelBuilder.Entity("SmartGarden.Models.Device", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -253,7 +253,7 @@ namespace SmartGarden.Migrations
                     b.ToTable("Devices");
                 });
 
-            modelBuilder.Entity("Smart_Garden.Models.MeasurementHistory", b =>
+            modelBuilder.Entity("SmartGarden.Models.MeasurementHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,9 +321,9 @@ namespace SmartGarden.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Smart_Garden.Models.Device", b =>
+            modelBuilder.Entity("SmartGarden.Models.Device", b =>
                 {
-                    b.HasOne("Smart_Garden.Models.CultivationPlan", "CultivationPlan")
+                    b.HasOne("SmartGarden.Models.CultivationPlan", "CultivationPlan")
                         .WithMany()
                         .HasForeignKey("CultivationPlanId");
 

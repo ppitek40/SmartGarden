@@ -1,0 +1,7 @@
+﻿@model CultivationPlan
+@{
+    var action = Model == null || Model.Id == 0 ? "Create" : "Edit";
+    ViewBag.Title = action;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
