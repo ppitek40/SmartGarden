@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartGarden.Models
+namespace SmartGarden.Models.Dtos
 {
-    public class CultivationPlan
+    public class DeviceSettingsDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int LightningThreshold { get; set; }
+        public int LightingThreshold { get; set; }
         public int WateringThreshold { get; set; }
         public int WateringDuration { get; set; }
         public int SoilMoisMax { get; set; }

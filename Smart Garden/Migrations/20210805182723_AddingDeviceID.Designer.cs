@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartGarden.Data;
 
 namespace SmartGarden.Migrations
 {
     [DbContext(typeof(SmartGardenContext))]
-    partial class SmartGardenContextModelSnapshot : ModelSnapshot
+    [Migration("20210805182723_AddingDeviceID")]
+    partial class AddingDeviceID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,23 +220,8 @@ namespace SmartGarden.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("BuzzerMuted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LightningThreshold")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Humidity")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("SoilMoisMax")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WateringDuration")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WateringThreshold")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -250,16 +237,19 @@ namespace SmartGarden.Migrations
                     b.Property<int?>("CultivationPlanId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("DeviceMdns")
+                    b.Property<int>("DeviceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DeviceType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("IpAddress")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("version")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -28,7 +28,9 @@ namespace SmartGarden
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-             services.Configure<IdentityOptions>(options =>
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.Configure<IdentityOptions>(options =>
              {
                  // Default Password settings.
                  options.Password.RequireDigit = false;
@@ -67,10 +69,7 @@ namespace SmartGarden
             app.UseAuthentication();
 
             app.UseAuthorization();
-           
             
-
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

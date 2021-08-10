@@ -1,0 +1,111 @@
+﻿@using Microsoft.EntityFrameworkCore
+
+@model SmartGarden.Models.Device
+@{
+    ;
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<table id="devices" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Device Name
+            </th>
+            <th>
+                version
+            </th>
+            <th>
+                mdnsDomain
+            </th>
+            <th>
+                Ip Address
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+@Html.ActionLink("Back","Index","Device",null, new {@class = "btn btn-info"})
+
+
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var table = $("#devices").DataTable({
+                searching: false,
+                paging: false,
+                ajax: {
+                    url: "/api/device/search",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "device"
+                    }, {
+                        data: "version"
+                    }, {
+                        data: "mdnsDomain"
+
+                    }, {
+                        data: "localIP"
+                    }, {
+                        data: "mdnsDomain",
+                        render: function(data) {
+                            return "<button data-device-mdns=" + data + " class ='btn btn-primary btn-smaller js-add'>Add Device</button>";
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        className: 'deviceName'
+                    },
+                    {
+                        targets: 1,
+                        className: 'version'
+                    },
+                    {
+                        targets: 2,
+                        className: 'mdnsDomain'
+                    },
+                    {
+                        targets: 3,
+                        className: 'ipAddress'
+                    }
+                ]
+
+
+            });
+            $("#devices").on("click",
+                ".js-add",
+                function () {
+                    var button = $(this);
+                    $.ajax({
+                        url: "/api/device/"+button.attr("data-device-mdns"),
+                        method: "POST",
+                        
+                        success: function() {
+                            button.prop('disabled', true);
+                            toastr.success("Device has been added.");
+                        },
+                        error: function() {
+                            toastr.error("Error occurred");
+                        }
+                    });
+                });
+        });
+    </script>
+
+}

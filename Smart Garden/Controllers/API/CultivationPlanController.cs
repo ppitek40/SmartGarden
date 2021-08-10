@@ -26,7 +26,21 @@ namespace SmartGarden.Controllers.API
         {
             var cultivationPlans = await _context.CultivationPlans.ToListAsync();
 
-            return cultivationPlans;
+            return Ok(cultivationPlans);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCultivationPlan(int id)
+        {
+            var cultivationPlan = _context.CultivationPlans.SingleOrDefault(c => c.Id == id);
+            if (cultivationPlan == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(cultivationPlan);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

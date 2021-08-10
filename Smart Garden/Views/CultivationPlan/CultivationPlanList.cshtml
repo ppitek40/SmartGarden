@@ -1,5 +1,74 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewBag.Title = "Cultivation Plans";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cultivation Plans</h2>
+@Html.ActionLink("Create", "Create", "CultivationPlan", null, new { @class = "btn btn-primary bottom-space" })
+<table id="cultivationPlans" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var table = $("#cultivationPlans").DataTable({
+                searching: false,
+                paging: false,
+                ajax: {
+                    url: "/api/cultivationplan",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, cultivationPlan) {
+                            return "<a href='/cultivationPlan/edit/" + cultivationPlan.id + "'>" + data + "</a>";
+                        }
+                    }, {
+                        data: "id",
+                        render: function(data) {
+                            return "<button data-cultivationPlan-id=" + data + " class ='btn btn-danger btn-smaller js-delete'>Delete</button>";
+                        }
+                    }
+                ]
+
+            });
+
+            $("#cultivationPlans").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to delete this cultivation Plan?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/cultivationPlan/" + button.attr("data-cultivationPlan-id"),
+                                    method: "DELETE",
+                                    success: function() {
+                                        table.row(button.parents("tr")).remove().draw();
+                                        toastr.success("cultivation Plan has been deleted.");
+                                    },
+                                    error: function() {
+                                        toastr.error("Error occurred");
+                                    }
+                                });
+                            }
+                        });
+                });
+        })
+    </script>
 }

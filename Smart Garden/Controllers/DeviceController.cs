@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal.Account;
 using SmartGarden.Data;
 using SmartGarden.Models;
@@ -14,10 +15,12 @@ namespace SmartGarden.Controllers
     public class DeviceController : Controller
     {
         private readonly SmartGardenContext _context;
+        private readonly IMapper _mapper;
 
-        public DeviceController(SmartGardenContext context)
+        public DeviceController(SmartGardenContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         // GET: DeviceController
         public ActionResult Index()
@@ -29,58 +32,42 @@ namespace SmartGarden.Controllers
         // GET: DeviceController/Create
         public ActionResult Create()
         {
-            return View("DeviceForm");
+            
+
+            return View("DeviceCreate");
         }
 
-        // POST: DeviceController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Device device)
-        {
-            if (!ModelState.IsValid)
-            {
-                
-                return View("DeviceForm");
-            }
-
-            _context.Devices.Add(device);
-            return RedirectToAction(nameof(Index));
-        }
+        
 
         // GET: DeviceController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var device = _context.Devices.SingleOrDefault(d => d.Id == id);
+            if (device == null)
+            {
+                return NotFound();
+            }
+
+            return View("DeviceEdit",device);
         }
 
         // POST: DeviceController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Device device)
+        public async Task<ActionResult> Edit(int id, Device device)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View("DeviceEdit", device);
             }
-            catch
-            {
-                return View("DeviceList");
-            }
+            
+            var deviceInDb = _context.Devices.SingleOrDefault(d => d.Id == device.Id);
+            _mapper.Map<Device, Device>(device, deviceInDb);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: DeviceController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

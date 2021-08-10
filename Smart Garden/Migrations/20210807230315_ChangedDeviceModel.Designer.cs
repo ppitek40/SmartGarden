@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartGarden.Data;
 
 namespace SmartGarden.Migrations
 {
     [DbContext(typeof(SmartGardenContext))]
-    partial class SmartGardenContextModelSnapshot : ModelSnapshot
+    [Migration("20210807230315_ChangedDeviceModel")]
+    partial class ChangedDeviceModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,23 +220,8 @@ namespace SmartGarden.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("BuzzerMuted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LightningThreshold")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Humidity")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("SoilMoisMax")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WateringDuration")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WateringThreshold")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

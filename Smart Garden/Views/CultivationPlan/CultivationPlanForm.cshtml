@@ -5,3 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>@action</h2>
+
+@using (Html.BeginForm(action, "CultivationPlan"))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => c.Name)
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.LightningThreshold)
+        @Html.TextBoxFor(c => c.LightningThreshold, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.LightningThreshold)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.WateringThreshold)
+        @Html.TextBoxFor(c => c.WateringThreshold, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.WateringThreshold)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.WateringDuration)
+        @Html.TextBoxFor(c => c.WateringDuration, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.WateringDuration)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.SoilMoisMax)
+        @Html.TextBoxFor(c => c.SoilMoisMax, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.SoilMoisMax)
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(c => c.BuzzerMuted, new { @class = "checkbox" })@Html.LabelFor(c => c.BuzzerMuted)
+        </label>
+    </div>
+    
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
