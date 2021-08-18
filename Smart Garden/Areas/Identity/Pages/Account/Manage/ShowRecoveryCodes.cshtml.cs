@@ -19,12 +19,7 @@ namespace SmartGarden.Areas.Identity.Pages.Account.Manage
 
         public IActionResult OnGet()
         {
-            if (RecoveryCodes == null || RecoveryCodes.Length == 0)
-            {
-                return RedirectToPage("./TwoFactorAuthentication");
-            }
-
-            return Page();
+            return NotFound();
         }
     }
 }
