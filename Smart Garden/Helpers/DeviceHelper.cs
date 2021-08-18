@@ -33,5 +33,25 @@ namespace SmartGarden.Helpers
 
         }
 
+        public static string MakeUriFromDeviceMdns(string mdns)
+        {
+            return "http://"+mdns+".local";
+        }
+
+        public static void GettingStatisticsFromDevices(SmartGardenContext context, IMapper mapper)
+        {
+            var devices = context.Devices.ToList();
+
+            foreach (var device in devices)
+            {
+                var apiClient = new DeviceRestClient(DeviceHelper.MakeUriFromDeviceMdns(device.DeviceMdns));
+                var data = apiClient.GetStatus();
+                var measurementHistory = mapper.Map<DeviceDataDto, MeasurementHistory>(data);
+                measurementHistory.DeviceId = device.Id;
+                measurementHistory.DateTime = DateTime.UtcNow;
+                context.MeasurementHistories.Add(measurementHistory);
+            }
+            context.SaveChanges();
+        }
     }
 }

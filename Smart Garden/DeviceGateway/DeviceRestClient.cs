@@ -41,7 +41,7 @@ namespace SmartGarden.DeviceGateway
         public DeviceDataDto GetStatus()
         {
             var response = _deviceApi.GetDeviceInfoAsync().Result;
-            return response;
+            return response.GetContent();
         }
 
         public HealthcheckDto Healthcheck()
@@ -82,7 +82,7 @@ namespace SmartGarden.DeviceGateway
         Task<Response<HealthcheckDto>> HealthCheck();
 
         [Get("/data")]
-        Task<DeviceDataDto> GetDeviceInfoAsync();
+        Task<Response<DeviceDataDto>> GetDeviceInfoAsync();
 
         [Post("/params")]
         Task<Response<ResponseStatus>> SaveSettingsToDeviceAsync([Body] DeviceSettingsDto deviceSettings);

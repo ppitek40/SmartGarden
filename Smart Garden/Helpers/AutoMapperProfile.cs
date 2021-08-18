@@ -17,6 +17,7 @@ namespace SmartGarden.Helpers
             CreateMap<CultivationPlan, DeviceSettingsDto>()
                 .ForMember(dest=>dest.LightingThreshold, 
                     opt=>opt.MapFrom(src=>src.LightningThreshold));
+            CreateMap<DeviceDataDto, MeasurementHistory>();
         }
     }
 }

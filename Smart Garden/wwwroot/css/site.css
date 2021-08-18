@@ -88,3 +88,31 @@ body {
 .btn-smaller {
     padding: 2px 12px;
 }
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.if1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.if2 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.if3 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.if4 {
+    grid-column: 2;
+    grid-row: 2;
+}

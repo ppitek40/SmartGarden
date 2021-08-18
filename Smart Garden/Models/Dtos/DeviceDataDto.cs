@@ -8,7 +8,7 @@ namespace SmartGarden.Models
 {
     public class DeviceDataDto
     {
-        public int tempValue { get; set; }
+        public float tempValue { get; set; }
         public int soilMoisValue { get; set; }
         public int humidValue { get; set; }
         public bool waterValue { get; set; }

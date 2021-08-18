@@ -1,8 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var nowMilliseconds = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+    var toMilliseconds = Convert.ToInt64(nowMilliseconds);
+    var fromMilliseconds = toMilliseconds - 14400000;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div >
+    <iframe src="http://localhost:3000/d-solo/xfc7fH77k/new-dashboard-copy?orgId=1&from=1629290125835&to=1629311725835&panelId=6" width="450" height="200" frameborder="0"></iframe>
+</div>
+<div class="wrapper">
+    <iframe class="if1" src="http://localhost:3000/d-solo/xfc7fH77k/new-dashboard-copy?orgId=1&from=@fromMilliseconds&to=@nowMilliseconds&panelId=2" width="550" height="300" frameborder="0"></iframe>
+    <iframe class="if2" src="http://localhost:3000/d-solo/xfc7fH77k/new-dashboard-copy?orgId=1&from=@fromMilliseconds&to=@nowMilliseconds&panelId=4" width="550" height="300" frameborder="0"></iframe>
+    <iframe class="if3" src="http://localhost:3000/d-solo/xfc7fH77k/new-dashboard-copy?orgId=1&from=@fromMilliseconds&to=@nowMilliseconds&panelId=10" width="550" height="300" frameborder="0"></iframe>
+    <iframe class="if4" src="http://localhost:3000/d-solo/xfc7fH77k/new-dashboard-copy?orgId=1&from=@fromMilliseconds&to=@nowMilliseconds&panelId=8" width="550" height="300" frameborder="0"></iframe>
 </div>

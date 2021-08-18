@@ -47,7 +47,7 @@ namespace SmartGarden.Controllers.API
                 return Conflict();
             }
 
-            var deviceRestClient = new DeviceRestClient("http://"+mdnsDomain+".local");
+            var deviceRestClient = new DeviceRestClient(DeviceHelper.MakeUriFromDeviceMdns(mdnsDomain));
             var response = deviceRestClient.Healthcheck();
             if (response.mdnsDomain == null)
             {

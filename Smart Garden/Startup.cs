@@ -8,10 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire;
+using Hangfire.SQLite;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using SmartGarden.Controllers.API;
 using SmartGarden.Data;
+using SmartGarden.Helpers;
 
 namespace SmartGarden
 {
@@ -44,13 +48,19 @@ namespace SmartGarden
                  options.SignIn.RequireConfirmedAccount = false;
              });
 
-            
-            
+            services.AddHangfire(configuration => configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSQLiteStorage(Configuration.GetConnectionString("HangfireConnection"),new SQLiteStorageOptions()));
+
+            services.AddHangfireServer(options => options.WorkerCount=1);
+
             services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,IBackgroundJobClient backgroundJobs, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +72,11 @@ namespace SmartGarden
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseHangfireDashboard();
+            RecurringJob.AddOrUpdate<StatisticsController>("Getting Statistics",x=>x.GetStatistics(),"*/3 * * * *");
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

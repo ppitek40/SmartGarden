@@ -9,6 +9,12 @@ namespace SmartGarden.Models
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; }
-        public float Value { get; set; }
+        public int DeviceId { get; set; }
+        public Device Device { get; set; }
+        public float tempValue { get; set; }
+        public int soilMoisValue { get; set; }
+        public int humidValue { get; set; }
+        public bool waterValue { get; set; }
+        public int lightValue { get; set; }
     }
 }
