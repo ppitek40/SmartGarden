@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Hangfire;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal.Account;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -37,6 +38,7 @@ namespace SmartGarden.Controllers.API
         }
         
         [HttpPost]
+        [AutomaticRetry(Attempts = 0)]
         public async Task<ActionResult> GetStatistics()
         {
             var devices = await _context.Devices.ToListAsync();

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal.Account;
 using SmartGarden.Data;
 using SmartGarden.Models;
@@ -12,6 +13,7 @@ using SmartGarden.ViewModels;
 
 namespace SmartGarden.Controllers
 {
+    [Authorize]
     public class DeviceController : Controller
     {
         private readonly SmartGardenContext _context;

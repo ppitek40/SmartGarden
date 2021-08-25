@@ -55,6 +55,7 @@ namespace SmartGarden
                 .UseSQLiteStorage(Configuration.GetConnectionString("HangfireConnection"),new SQLiteStorageOptions()));
 
             services.AddHangfireServer(options => options.WorkerCount=1);
+            
 
             services.AddRazorPages();
         }

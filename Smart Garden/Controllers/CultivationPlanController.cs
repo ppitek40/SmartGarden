@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Controller;
 using SmartGarden.Data;
 using SmartGarden.Models;
 
 namespace SmartGarden.Controllers
 {
+    [Authorize]
     public class CultivationPlanController : Controller
     {
         private readonly SmartGardenContext _context;
