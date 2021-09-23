@@ -31,12 +31,6 @@ namespace SmartGarden.Controllers.API
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<int> Test()
-        {
-            return 1;
-        }
-        
         [HttpPost]
         [AutomaticRetry(Attempts = 0)]
         public async Task<ActionResult> GetStatistics()

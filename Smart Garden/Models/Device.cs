@@ -14,7 +14,7 @@ namespace SmartGarden.Models
         public string DeviceMdns { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
-        public string version { get; set; }
+        public string Version { get; set; }
         public int? CultivationPlanId { get; set; }
         public CultivationPlan CultivationPlan { get; set; }
 

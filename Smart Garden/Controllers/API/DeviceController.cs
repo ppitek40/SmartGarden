@@ -57,7 +57,7 @@ namespace SmartGarden.Controllers.API
             {
                 DeviceMdns = response.mdnsDomain,
                 Name = response.device,
-                version = response.version
+                Version = response.version
             };
             _context.Devices.Add(device);
             await _context.SaveChangesAsync();

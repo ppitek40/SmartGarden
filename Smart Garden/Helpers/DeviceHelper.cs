@@ -21,7 +21,7 @@ namespace SmartGarden.Helpers
         {
             _mdns = mdns;
             _mapper = mapper;
-            _deviceRestClient = new DeviceRestClient("http://" + mdns + ".local");
+            _deviceRestClient = new DeviceRestClient(MakeUriFromDeviceMdns(mdns));
         }
 
         public async Task AddPlanToDevice(CultivationPlan cultivationPlan)
